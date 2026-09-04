@@ -87,6 +87,4 @@ spunkys-hairflair/
 | 4 | Test & Refine — cross-browser/device testing, peer review, bug fixes |
 | 5 | Documentation & Submission — final docs, Task 2 submission, release tag |
 
-## License
 
-Academic project — created for WIL 3A (XISD5319).
