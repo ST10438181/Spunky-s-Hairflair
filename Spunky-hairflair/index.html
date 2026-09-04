@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spunky's Hairflair | Premium Hair Salon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-feather-alt"></i>
+                <span>Spunky's <span class="logo-highlight">Hairflair</span></span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <button class="nav-btn active" data-page="home"><i class="fas fa-calendar-check"></i> Book Now</button>
+                <button class="nav-btn" data-page="bookings"><i class="fas fa-list"></i> My Bookings</button>
+                <button class="nav-btn" data-page="services"><i class="fas fa-cut"></i> Services</button>
+                <button class="nav-btn" data-page="contact"><i class="fas fa-envelope"></i> Contact</button>
+            </div>
+            <div class="nav-auth">
+                <div id="authStatus" class="auth-status" onclick="showAuthModal()">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="userNameDisplay">Account</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="heroSection">
+        <div class="hero-content">
+            <div class="hero-badge">✨ Premium Hair Salon ✨</div>
+            <h1>Where Your Hair<br><span class="hero-highlight">Tells a Story</span></h1>
+            <p>Experience luxury hair care with our expert stylists. Book your appointment today and leave feeling fabulous.</p>
+            <div class="hero-stats">
+                <div class="stat"><span>500+</span> Happy Clients</div>
+                <div class="stat"><span>4.9</span> ★ Rating</div>
+                <div class="stat"><span>8+</span> Years Experience</div>
+            </div>
+            <button class="btn-primary-hero" onclick="scrollToBooking()"><i class="fas fa-arrow-right"></i> Book Your Appointment</button>
+        </div>
+        <div class="hero-image">
+            <div class="hero-image-circle">
+                <i class="fas fa-crown"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="main-container">
+        <!-- HOME PAGE - Booking Section -->
+        <div id="homePage" class="page active">
+            <!-- Login Required Banner -->
+            <div id="loginBanner" class="login-banner">
+                <div class="banner-content">
+                    <i class="fas fa-lock"></i>
+                    <p>Please log in to book appointments and manage your bookings</p>
+                    <button class="btn-login" onclick="showAuthModal()">Login / Register <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Booking Form (Hidden until logged in) -->
+            <div id="bookingForm" style="display: none;">
+                <div class="booking-header">
+                    <h2><i class="fas fa-calendar-alt"></i> Book Your Appointment</h2>
+                    <p>Fill in the details below to secure your spot</p>
+                </div>
+
+                <!-- Step 1: Service Selection -->
+                <div class="booking-card">
+                    <div class="step-indicator">
+                        <span class="step-number active">1</span>
+                        <span class="step-line"></span>
+                        <span class="step-number">2</span>
+                        <span class="step-line"></span>
+                        <span class="step-number">3</span>
+                        <span class="step-line"></span>
+                        <span class="step-number">4</span>
+                    </div>
+                    <h3><i class="fas fa-spa"></i> Choose Your Service</h3>
+                    <div class="services-grid" id="servicesGrid"></div>
+                </div>
+
+                <!-- Step 2: Stylist Selection -->
+                <div class="booking-card">
+                    <h3><i class="fas fa-user-tie"></i> Choose Your Stylist</h3>
+                    <div class="stylists-grid" id="stylistsGrid"></div>
+                </div>
+
+                <!-- Step 3: Date & Time -->
+                <div class="booking-card">
+                    <h3><i class="fas fa-calendar-day"></i> Select Date & Time</h3>
+                    <div class="datetime-container">
+                        <div class="date-picker" id="datePicker"></div>
+                        <div class="time-picker" id="timePicker"></div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Summary & Confirm -->
+                <div class="booking-card" id="summaryCard">
+                    <h3><i class="fas fa-receipt"></i> Booking Summary</h3>
+                    <div class="summary-content" id="summaryContent">
+                        <p class="empty-summary">Select a service, stylist, date and time to see your summary</p>
+                    </div>
+                    <button class="btn-confirm" id="confirmBtn" disabled>Confirm Booking <i class="fas fa-check-circle"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MY BOOKINGS PAGE -->
+        <div id="bookingsPage" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-list-ul"></i> My Appointments</h2>
+                <p>View and manage your upcoming appointments</p>
+            </div>
+            <div id="bookingsList" class="bookings-list">
+                <div class="empty-state">
+                    <i class="fas fa-calendar-plus"></i>
+                    <h3>No Bookings Yet</h3>
+                    <p>Book your first appointment to see it here</p>
+                    <button class="btn-primary" onclick="switchPage('home')">Book Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SERVICES PAGE -->
+        <div id="servicesPage" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-cut"></i> Our Premium Services</h2>
+                <p>Discover our range of professional hair services</p>
+            </div>
+            <div class="services-full-grid" id="servicesFullGrid"></div>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="contactPage" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-address-card"></i> Get In Touch</h2>
+                <p>We'd love to hear from you</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info-card">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3>Visit Us</h3>
+                    <p>Mandalay, Mitchell's Plain</p>
+                    <p>Cape Town, 7785</p>
+                </div>
+                <div class="contact-info-card">
+                    <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                    <h3>Call Us</h3>
+                    <p>+27 81 234 5678</p>
+                    <p>Mon-Sat: 9am - 6pm</p>
+                </div>
+                <div class="contact-info-card">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <h3>Email Us</h3>
+                    <p>hello@spunkyshairflair.co.za</p>
+                    <p>Response within 24hrs</p>
+                </div>
+                <div class="contact-info-card">
+                    <div class="contact-icon"><i class="fas fa-instagram"></i></div>
+                    <h3>Follow Us</h3>
+                    <p>@spunkyshairflair</p>
+                    <p>Instagram | Facebook</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-feather-alt"></i>
+                <span>Spunky's Hairflair</span>
+            </div>
+            <p>© 2024 Spunky's Hairflair. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-plus"></i> Welcome to Spunky's</h2>
+                <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="regName" placeholder="Full Name">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="regEmail" placeholder="Email Address">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-phone"></i>
+                    <input type="tel" id="regPhone" placeholder="Phone Number">
+                </div>
+                <button class="btn-register" onclick="registerUser()">
+                    <i class="fas fa-arrow-right"></i> Start Booking Now
+                </button>
+                <p class="modal-note">✨ No password needed - just enter your details to get started!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
