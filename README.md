@@ -72,7 +72,7 @@ spunkys-hairflair/
 
 1. Clone the repository:
    ```
-   git clone <repo-url>
+   https://github.com/ST10438181/Spunky-s-Hairflair.git
    ```
 2. Open `website/index.html` in a browser, or serve the `website/` folder with a local dev server.
 3. No build step is required — the site runs on plain HTML/CSS/JS with LocalStorage.
